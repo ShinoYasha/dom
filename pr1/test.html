@@ -1,0 +1,22 @@
+<ul class="ct">
+    <li data-img="1.jpg">鼠标放置查看图片1</li>
+    <li data-img="2.jpg">鼠标放置查看图片2</li>
+    <li data-img="3.jpg">鼠标放置查看图片3</li>
+</ul>
+<div class="img-preview"></div>
+<script>
+    var libtn = document.querySelectorAll('li')
+    var div = document.querySelector('.img-preview')
+    libtn.forEach(function(value, index){
+      var pic = value.getAttribute('data-img')
+      value.onmouseover = function(){
+        var newImg = document.createElement('img')
+        newImg.src = pic
+        div.appendChild(newImg)
+      }
+      value.onmouseout = function() {
+        div.removeChild(div.childNodes[0])
+      }
+    })
+
+</script>
