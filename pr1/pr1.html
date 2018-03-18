@@ -1,0 +1,36 @@
+<ul class="ct">
+    <li data-img="1.jpg">鼠标放置查看图片1</li>
+    <li data-img="2.jpg">鼠标放置查看图片2</li>
+    <li data-img="3.jpg">鼠标放置查看图片3</li>
+</ul>
+<div class="img-preview"></div>
+<script>
+  var ct = document.querySelector('.ct')
+  var div = document.querySelector('.img-preview')
+  ct.addEventListener('mouseover', function(e) {
+    if(e.target.getAttribute('data-img')) {
+      var pic = document.createElement('img')
+      pic.src = e.target.getAttribute('data-img')
+      div.appendChild(pic)
+    }
+  })
+  ct.addEventListener('mouseout', function(){
+    if(div.childNodes[0]){
+     div.removeChild(div.childNodes[0])
+    }
+  })
+  
+ /* ct.onmouseover = function(e) {
+    if(e.target.getAttribute('data-img')) {
+      var pic = document.createElement('img')
+      pic.src = e.target.getAttribute('data-img')
+      div.appendChild(pic)
+    }
+  }
+  ct.onmouseout = function(){
+    if(div.childNodes[0]){
+     div.removeChild(div.childNodes[0])
+    }
+  }*/
+
+</script>

@@ -1,0 +1,52 @@
+<ul class="ct">
+  <li>这里是</li>
+  <li>饥人谷</li>
+  <li>任务班</li>
+</ul>
+<input class="ipt-add-content" placeholder="添加内容"/>
+<button id="btn-add-start">开头添加</button>
+<button id="btn-add-end">结尾添加</button>
+<script>
+var insertFirst = document.querySelector('#btn-add-start')
+var insertLast = document.querySelector('#btn-add-end')
+var ul = document.querySelector('.ct')
+insertFirst.addEventListener('click', function(){
+  var newli = document.createElement('li')
+  newli.innerText = document.querySelector('input').value
+  ul.insertBefore(newli, ul.firstChild)
+})
+insertLast.addEventListener('click', function(){
+  var newli = document.createElement('li')
+  newli.innerText = document.querySelector('input').value
+  ul.appendChild(newli)
+})
+ul.addEventListener('click', function(e){
+  if(e.target.tagName === 'LI') {
+    console.log(e.target.innerText)
+  }}
+)
+/*
+var first = document.querySelector('#btn-add-start')
+first.onclick = function(){
+  var list = document.querySelector('.ct')
+  var p = document.createElement('p')
+  var str = document.createTextNode(document.querySelector('input').value)
+  p.appendChild(str)
+  list.insertBefore(p, list.firstChild)
+}
+var end = document.querySelector('#btn-add-end')
+end.onclick = function(){
+  var p = document.createElement('p')
+  var str = document.createTextNode(document.querySelector('input').value)
+  p.appendChild(str)
+  document.querySelector('.ct').appendChild(p)
+}
+var li = document.querySelectorAll('li')
+li.forEach(function(value, index){
+  value.onclick = function() {
+    console.log(value.innerText)
+  }
+})
+*/
+
+</script>
