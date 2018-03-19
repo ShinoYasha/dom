@@ -12,13 +12,16 @@ var insertLast = document.querySelector('#btn-add-end')
 var ul = document.querySelector('.ct')
 insertFirst.addEventListener('click', function(){
   var newli = document.createElement('li')
+  if(/^\s*$/.test(document.querySelector('input').value) === false){
   newli.innerText = document.querySelector('input').value
   ul.insertBefore(newli, ul.firstChild)
+  }
 })
 insertLast.addEventListener('click', function(){
   var newli = document.createElement('li')
+  if(/^\s*$/.test(document.querySelector('input').value) === false){
   newli.innerText = document.querySelector('input').value
-  ul.appendChild(newli)
+  ul.appendChild(newli)}
 })
 ul.addEventListener('click', function(e){
   if(e.target.tagName === 'LI') {
