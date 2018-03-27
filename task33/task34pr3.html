@@ -145,6 +145,7 @@
     $('.add').on('click', function(e){
       console.log('1')
       e.preventDefault()
+      $('.obj').removeClass('edit')
       var product = getProd()
       $.each(product, function(idx, prod){
         var html = addHtml(prod)
