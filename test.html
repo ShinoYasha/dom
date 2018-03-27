@@ -1,18 +1,56 @@
 <script>
-function css(node, styleObj){
-//todo ..
-  for(i in styleObj) {
-    node.style[i] = styleObj[i]
-  }
+function ajax(options){
+    let url = options.url
+    let data = options.data || {}
+    let type = options.type || 'GET'
+    let dataType = options.dataType || 'JSON'
+    let onsuccess = options.onsuccess || function(){}
+    let onerror = options.onerror || function(){}
+
+    let dataStr = []
+    for(let key in data) {
+        dataStr.push(key + '=' + data[key]) // 将json数据转成a=b&c=d形式
+    }
+    dataStr = dataStr.join('&')
+
+    if(type === 'GET') {
+        url += '?' + dataStr    // 如果是'get',拼接url
+    }
+
+    let xhr = new XMLHttpRequest()
+    
+    xhr.open(type, dataStr, true)   // 'POST' send(dataStr),'GET'send（）
+    if(xhr.type === 'POST') {
+        xhr.send(dataStr)
+    }else {
+        xhr.send()
+    }
+    
+    xhr.addEventListener('load', function() {
+        if((xhr.status>=200&&xhr.status<=300) || xhr.status === 304) { // 成功
+            if(dataType === 'JSON') {
+                onsuccess(JSON.parse(xhr.responseText))
+            }else {
+                onsuccess(xhr.responseText)
+            }
+        } else {
+            onerror()
+        }
+    }
+    )
+    xhr.addEventListener('error', onerror)
+    
 }
-css(document.body, {
-  'color': 'red',
-  'background-color': '#ccc'
+ajax({
+    url: 'http://api.jirengu.com/weather.php',
+    data: {
+        city: '北京'
+    },
+    onsuccess: function(ret){
+        console.log(ret)
+    },
+    onerror: function(){
+        console.log('服务器异常')
+    }
 })
-document.getElementById('elementId');
-document.getElementsByName('elements')
-document.getElementsByTagName('tagName');
-document.getElementsClassName('className');
-document.querySelector()
-document.querySelectorAll('#text')
 </script>

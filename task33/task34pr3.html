@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      a {
+        text-decoration: none;
+      }
+      .container {
+        width: 800px;
+        margin: 0 auto;
+      }
+      .container .obj {
+        float: left;
+        margin: 10px;
+        border: 1px solid black;
+        width: 30.43%;
+        position: relative;
+      }
+      .container .show:after {
+        display: block;
+        content: '';
+        clear: both;
+      }
+      .container .obj .pic {
+        padding: 5px 20px;
+
+      }
+      .container .obj img {
+        width: 200px;
+        height: 200px;
+      }
+      .container .hidden {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: rgba(0, 0,0,0.3);
+        transition: all 0.3s;
+        opacity: 0;
+      }
+      .obj.edit .hidden {
+        opacity: 1;
+      }
+      .obj .prod-name {
+        font-size: 14px;
+      }
+      .obj .prod-price {
+        font-size: 12px;
+        color:  #c81623;;
+        padding-top: 10px;
+      }
+      .container .hidden .btn {
+        position: absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%, -50%);
+      }
+      .btn{
+        display: inline-block;
+        border: 1px solid #c81623;
+        color: #c81623;
+        padding: 10px 15px;
+        border-radius: 3px;
+        text-align: center;
+        background: #fff;
+        cursor: pointer;
+        margin-left: 10px;
+      }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <div class="show">
+      <div class="obj">
+        <div class="hidden">
+          <a class="btn delete">删除</a>
+        </div>
+        <div class="pic">
+          <img src="//picsum.photos/200/200/?image=1" alt="">
+          <div class="prod-name">藏美千足金</div>
+          <div class="prod-price">￥1699.00</div>
+        </div>
+      </div>
+      <div class="obj">
+        <div class="hidden">
+          <a class="btn delete">删除</a>
+        </div>
+        <div class="pic">
+          <img src="//picsum.photos/200/200/?image=1" alt="">
+          <div class="prod-name">藏美千足金</div>
+          <div class="prod-price">￥1699.00</div>
+        </div>
+      </div>
+      <div class="obj">
+        <div class="hidden">
+          <a class="btn delete">删除</a>
+        </div>
+        <div class="pic">
+          <img src="//picsum.photos/200/200/?image=1" alt="">
+          <div class="prod-name">藏美千足金</div>
+          <div class="prod-price">￥1699.00</div>
+        </div>
+      </div>
+    </div>
+    <a href="#" class="btn add">添加</a>
+    <a href="#" class="btn edit">编辑</a>
+  </div>
+  <script>
+    function getProd(){
+      var ans = []
+      for(var i = 0; i < 3; i++) {
+        var prod = {
+          src: 'https://picsum.photos/200/200/?image=' + Math.floor(Math.random()*100),
+          name: '珂兰 黄金手 猴哥款',
+          price: '￥' + Math.floor(Math.random()*100)
+        }
+        ans.push(prod)
+      }
+      return ans
+    }
+    function addHtml(prod){
+      var html = "<div class=\"obj\">\n" +
+          "        <div class=\"hidden\">\n" +
+          "          <a class=\"btn delete\">删除</a>\n" +
+          "        </div>\n" +
+          "        <div class=\"pic\">\n" +
+          "          <img src="+prod.src+" alt=\"\">\n" +
+          "          <div class=\"prod-name\">"+prod.name+"</div>\n" +
+          "          <div class=\"prod-price\">"+prod.price+"</div>\n" +
+          "        </div>\n" +
+          "      </div>"
+      return html
+    }
+    $('.add').on('click', function(e){
+      console.log('1')
+      e.preventDefault()
+      var product = getProd()
+      $.each(product, function(idx, prod){
+        var html = addHtml(prod)
+        $('.show').append(html)
+      })
+    })
+    $('.edit').on('click', function(e){
+      console.log('1212')
+      e.preventDefault()
+      $('.obj').toggleClass('edit')
+    })
+    $('.show').on('click','.delete', function(e){
+      e.preventDefault()
+      $(this).parents('.obj').remove()
+    })
+  </script>
+</body>
+</html>
