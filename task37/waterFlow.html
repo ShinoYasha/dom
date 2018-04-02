@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <style>
+        .container {
+            position: relative;
+            width: 600px;
+            margin: 0 auto;
+        }
+        .container img {
+            position: absolute;
+            width: 100px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+        <img src="" alt="" class="src">
+
+    </div>
+    <script>
+        function loadImage($img) {
+            let add = "https://picsum.photos/300/" +Math.floor(Math.random()*20)*50  + "/?image=" + Math.floor(Math.random()*100)
+            console.log(add)
+            $($img).attr('src', add)
+        }
+        $('.container img').each(function(){
+            var $node = $(this)
+            loadImage($node)
+        })
+
+        var colCount = Math.floor(($('.container').width()/$('.container img').outerWidth(true)))
+        var heightArr = []
+        console.log(colCount)
+
+        for(var i = 0; i<colCount; i++){
+            heightArr.push(0)
+        }
+
+        $('.container img').on('load', function(){
+            var minValue = heightArr[0]
+            var minIndex = 0
+            for(var i=0;i<colCount;i++){
+                if(heightArr[i]<minValue){
+                    minValue = heightArr[i]
+                    minIndex = i
+                }
+            }
+            $(this).css({
+                left: minIndex * $('.container img').outerWidth(true),
+                top: minValue
+            })
+            heightArr[minIndex] += $(this).outerHeight(true)
+        })
+    </script>
+</body>
+</html>
